@@ -141,39 +141,14 @@
     100% { transform: translateX(100%); }
   }
 
-  /* Enhanced drop zone styles */
+  /* Minimal drop zone styles */
   .drop-zone {
-    @apply relative border-2 border-dashed border-border rounded-2xl p-12 text-center overflow-hidden;
-    background: var(--gradient-glass);
-    backdrop-filter: blur(10px);
-    transition: var(--transition-bounce);
+    @apply border-2 border-dashed border-border rounded-xl transition-all duration-200 cursor-pointer;
   }
 
-  .drop-zone::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--gradient-hero);
-    opacity: 0;
-    transition: var(--transition-smooth);
-    pointer-events: none;
-  }
-
-  .drop-zone:hover::before {
-    opacity: 1;
-  }
-
+  .drop-zone:hover,
   .drop-zone.drag-over {
-    @apply border-primary scale-[1.02];
-    box-shadow: var(--shadow-glow-pink);
-    border-style: solid;
-  }
-
-  .drop-zone.drag-over::before {
-    opacity: 1;
+    @apply border-primary bg-primary/5 scale-[1.01];
   }
 
   /* Processing overlay with enhanced shimmer */

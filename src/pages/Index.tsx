@@ -61,54 +61,38 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-surface">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        {/* Enhanced Header */}
-        <header className="text-center mb-16 relative">
-          <div className="absolute inset-0 bg-gradient-hero opacity-50 blur-3xl animate-pulse-slow -z-10" />
-          
-          <h1 className="text-5xl md:text-7xl font-black bg-gradient-duotone bg-clip-text text-transparent mb-6 animate-gradient text-glow">
-            Brave Pink Hero Green 1312
+        {/* Minimalist Header */}
+        <header className="text-center mb-12">
+          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-duotone bg-clip-text text-transparent mb-3">
+            Duotone Editor
           </h1>
-          
-          <div className="space-y-4 max-w-3xl mx-auto">
-            <p className="text-xl md:text-2xl text-muted-foreground font-medium">
-              Pink × Green duotone. Local & private.
-            </p>
-            <p className="text-base text-muted-foreground leading-relaxed">
-              Transform your photos with beautiful duotone effects. All processing happens in your browser — 
-              your photos never leave your device.
-            </p>
-          </div>
-
-          {/* Floating decoration elements */}
-          <div className="absolute -top-8 -left-8 w-16 h-16 bg-gradient-duotone rounded-full opacity-20 animate-float" />
-          <div className="absolute -top-4 -right-12 w-8 h-8 bg-gradient-duotone rounded-full opacity-30 animate-float" style={{animationDelay: '1s'}} />
-          <div className="absolute top-20 -right-8 w-12 h-12 bg-gradient-duotone rounded-full opacity-15 animate-float" style={{animationDelay: '2s'}} />
+          <p className="text-muted-foreground">
+            Pink × Green duotone filter
+          </p>
         </header>
 
         {/* Main content */}
         <main className="space-y-8">
           {!originalFile && !processedImage && (
-            <Card className="glass-strong shadow-drop interactive animate-bounce-subtle">
+            <div className="max-w-lg mx-auto">
               <DropzoneUploader onFileSelect={handleFileSelect} />
-            </Card>
+            </div>
           )}
 
           {error && (
-            <Card className="glass border border-destructive/20 bg-destructive/5 interactive animate-bounce-subtle">
-              <div className="text-center p-8">
-                <p className="text-destructive font-bold mb-6 text-lg">{error}</p>
-                <button
-                  onClick={handleReset}
-                  className="px-8 py-3 bg-gradient-duotone text-white rounded-full hover:opacity-90 interactive btn-glow font-semibold"
-                >
-                  Try Again
-                </button>
-              </div>
-            </Card>
+            <div className="max-w-md mx-auto text-center p-6 bg-destructive/5 border border-destructive/20 rounded-xl">
+              <p className="text-destructive mb-4">{error}</p>
+              <button
+                onClick={handleReset}
+                className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+              >
+                Try Again
+              </button>
+            </div>
           )}
 
           {originalFile && (
-            <Card className="glass-strong shadow-drop interactive">
+            <div className="max-w-2xl mx-auto">
               <DuotoneCanvas
                 file={originalFile}
                 onProcessingComplete={handleProcessingComplete}
@@ -116,21 +100,22 @@ const Index = () => {
                 isProcessing={isProcessing}
                 isReversed={isReversed}
               />
-              <div className="mt-6 flex justify-center">
-                <button
-                  onClick={handleReverseToggle}
-                  className="flex items-center gap-3 px-6 py-3 text-sm font-medium glass rounded-full interactive hover:scale-105 btn-glow"
-                  disabled={isProcessing}
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/>
-                    <polyline points="7,13 12,18 17,13"/>
-                    <polyline points="7,11 12,6 17,11"/>
-                  </svg>
-                  {isReversed ? 'Pink shadows, Green highlights' : 'Green shadows, Pink highlights'}
-                </button>
-              </div>
-            </Card>
+              {!isProcessing && (
+                <div className="mt-4 flex justify-center">
+                  <button
+                    onClick={handleReverseToggle}
+                    className="flex items-center gap-2 px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted/50"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/>
+                      <polyline points="7,13 12,18 17,13"/>
+                      <polyline points="7,11 12,6 17,11"/>
+                    </svg>
+                    {isReversed ? 'Pink shadows' : 'Green shadows'}
+                  </button>
+                </div>
+              )}
+            </div>
           )}
 
           {processedImage && (
@@ -141,13 +126,11 @@ const Index = () => {
           )}
         </main>
 
-        {/* Enhanced Footer */}
-        <footer className="text-center mt-20 pt-12 border-t border-border/50">
-          <div className="glass rounded-2xl p-6 inline-block">
-            <p className="text-sm text-muted-foreground font-medium">
-              🔒 All processing happens locally in your browser. Your photos never leave your device.
-            </p>
-          </div>
+        {/* Simple Footer */}
+        <footer className="text-center mt-16 pt-8 border-t border-border/30">
+          <p className="text-xs text-muted-foreground">
+            Local processing • Your photos never leave your device
+          </p>
         </footer>
       </div>
     </div>

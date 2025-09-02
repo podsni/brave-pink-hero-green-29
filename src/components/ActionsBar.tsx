@@ -41,58 +41,41 @@ export const ActionsBar = ({ processedImage, onReset }: ActionsBarProps) => {
   const fileSizeKB = Math.round(processedImage.url.length * 0.75 / 1024); // Rough estimate
 
   return (
-    <Card className="glass-strong shadow-drop interactive">
-      <div className="flex flex-col lg:flex-row items-center justify-between gap-8 p-8">
-        {/* Enhanced Preview and info */}
-        <div className="flex items-center space-x-6">
-          <div className="relative">
-            <img
-              src={processedImage.url}
-              alt="Processed duotone image"
-              className="w-24 h-24 object-cover rounded-2xl shadow-lg border-2 border-border interactive"
-            />
-            <div className="absolute -top-3 -right-3 p-2 bg-gradient-duotone rounded-full shadow-lg animate-glow">
-              <Image className="w-4 h-4 text-white" />
-            </div>
-          </div>
-          
-          <div className="text-left space-y-2">
-            <h4 className="font-bold text-lg text-foreground">
-              {processedImage.filename}
-            </h4>
-            <p className="text-sm text-muted-foreground font-medium">
-              {processedImage.dimensions.width} × {processedImage.dimensions.height}px
-            </p>
-            <div className="glass rounded-lg px-3 py-1">
-              <p className="text-xs font-medium text-primary">
-                ~{fileSizeKB}KB PNG
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Enhanced Actions */}
-        <div className="flex items-center space-x-4">
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={onReset}
-            className="flex items-center space-x-3 glass interactive hover:scale-105 btn-green-glow px-6 py-3"
-          >
-            <RotateCcw className="w-5 h-5" />
-            <span className="font-semibold">Replace Photo</span>
-          </Button>
-          
-          <Button
-            size="lg"
-            onClick={handleDownload}
-            className="bg-gradient-duotone hover:opacity-90 text-white shadow-lg flex items-center space-x-3 interactive hover:scale-105 btn-glow px-8 py-3 font-bold"
-          >
-            <Download className="w-5 h-5" />
-            <span>Download PNG</span>
-          </Button>
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-card rounded-xl border">
+      {/* Image Preview */}
+      <div className="flex items-center space-x-4">
+        <img
+          src={processedImage.url}
+          alt="Result"
+          className="w-16 h-16 object-cover rounded-lg border"
+        />
+        <div>
+          <h4 className="font-medium">{processedImage.filename}</h4>
+          <p className="text-sm text-muted-foreground">
+            {processedImage.dimensions.width} × {processedImage.dimensions.height}px • ~{fileSizeKB}KB
+          </p>
         </div>
       </div>
-    </Card>
+
+      {/* Actions */}
+      <div className="flex items-center space-x-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={onReset}
+        >
+          <RotateCcw className="w-4 h-4 mr-2" />
+          New Image
+        </Button>
+        
+        <Button
+          onClick={handleDownload}
+          className="bg-primary hover:bg-primary/90"
+        >
+          <Download className="w-4 h-4 mr-2" />
+          Download
+        </Button>
+      </div>
+    </div>
   );
 };

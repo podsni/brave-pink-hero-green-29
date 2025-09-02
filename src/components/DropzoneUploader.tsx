@@ -61,57 +61,49 @@ export const DropzoneUploader = ({ onFileSelect }: DropzoneUploaderProps) => {
   };
 
   return (
-    <div className="space-y-6 p-8">
-      <div
-        className={`drop-zone ${isDragOver ? 'drag-over' : ''}`}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-      >
-        <div className="flex flex-col items-center space-y-6">
-          <div className="relative">
-            <div className="p-6 rounded-full bg-gradient-duotone animate-glow">
-              <Image className="w-10 h-10 text-white drop-shadow-lg" />
-            </div>
-            <div className="absolute -inset-2 bg-gradient-duotone rounded-full opacity-20 animate-pulse-slow -z-10" />
-          </div>
-          
-          <div className="text-center space-y-3">
-            <h3 className="text-2xl font-bold text-foreground">
-              Drop your image here
-            </h3>
-            <p className="text-muted-foreground text-lg">
-              or click to browse your files
-            </p>
-          </div>
+    <div className="drop-zone" 
+         onDragOver={handleDragOver}
+         onDragLeave={handleDragLeave}
+         onDrop={handleDrop}>
+      
+      <div className="flex flex-col items-center space-y-6 py-16">
+        <div className="w-16 h-16 rounded-2xl bg-gradient-duotone flex items-center justify-center">
+          <Image className="w-8 h-8 text-white" />
+        </div>
+        
+        <div className="text-center">
+          <h3 className="text-xl font-semibold mb-2">
+            Drop image here
+          </h3>
+          <p className="text-muted-foreground text-sm">
+            or click to browse
+          </p>
+        </div>
 
-          <Button 
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg px-8 py-4 text-lg font-semibold interactive btn-glow animate-bounce-subtle"
-            onClick={() => document.getElementById('file-input')?.click()}
-          >
-            <Upload className="w-5 h-5 mr-3" />
-            Choose Image
-          </Button>
+        <Button 
+          onClick={() => document.getElementById('file-input')?.click()}
+          className="bg-primary hover:bg-primary/90 text-primary-foreground"
+        >
+          <Upload className="w-4 h-4 mr-2" />
+          Choose File
+        </Button>
 
-          <input
-            id="file-input"
-            type="file"
-            accept={ACCEPTED_TYPES.join(',')}
-            onChange={handleFileInput}
-            className="hidden"
-          />
+        <input
+          id="file-input"
+          type="file"
+          accept={ACCEPTED_TYPES.join(',')}
+          onChange={handleFileInput}
+          className="hidden"
+        />
 
-          <div className="text-sm text-muted-foreground text-center space-y-1 glass rounded-lg p-4">
-            <p className="font-medium">Supports JPEG, PNG, WebP</p>
-            <p className="text-xs">Maximum file size: 25MB</p>
-          </div>
+        <div className="text-xs text-muted-foreground">
+          JPEG, PNG, WebP • Max 25MB
         </div>
       </div>
 
       {error && (
-        <div className="glass border border-destructive/20 rounded-xl p-6 animate-bounce-subtle">
-          <p className="text-destructive text-center font-medium">{error}</p>
+        <div className="mt-4 p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
+          <p className="text-destructive text-sm text-center">{error}</p>
         </div>
       )}
     </div>
