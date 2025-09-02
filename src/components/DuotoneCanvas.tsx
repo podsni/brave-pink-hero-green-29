@@ -47,20 +47,22 @@ export const DuotoneCanvas = ({
   }, [file, onProcessingComplete, onProcessingError, isReversed]);
 
   return (
-    <div className="space-y-4">
-      <div className="text-center">
-        <h3 className="text-lg font-semibold mb-2">Processing Image</h3>
-        <p className="text-sm text-muted-foreground">
-          {file.name} • {Math.round(file.size / 1024)}KB
-        </p>
+    <div className="space-y-6 p-8">
+      <div className="text-center space-y-3">
+        <h3 className="text-2xl font-bold mb-3">Processing Image</h3>
+        <div className="glass rounded-full px-6 py-2 inline-block">
+          <p className="text-sm font-medium">
+            {file.name} • {Math.round(file.size / 1024)}KB
+          </p>
+        </div>
       </div>
 
-      <div className="relative bg-muted rounded-lg overflow-hidden">
+      <div className="relative glass-strong rounded-2xl overflow-hidden shadow-drop">
         {isProcessing && (
-          <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm z-10">
-            <div className="flex items-center space-x-3 text-muted-foreground">
-              <Loader2 className="w-6 h-6 animate-spin" />
-              <span className="font-medium">Applying duotone effect...</span>
+          <div className="absolute inset-0 flex items-center justify-center backdrop-blur-sm z-10">
+            <div className="glass rounded-2xl p-6 flex items-center space-x-4">
+              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+              <span className="font-bold text-lg">Applying duotone effect...</span>
             </div>
           </div>
         )}
@@ -68,7 +70,7 @@ export const DuotoneCanvas = ({
         <canvas
           ref={canvasRef}
           className="w-full h-auto max-h-96 object-contain"
-          style={{ display: isProcessing ? 'block' : 'block' }}
+          style={{ display: 'block' }}
         />
 
         {!isProcessing && (
@@ -77,8 +79,12 @@ export const DuotoneCanvas = ({
       </div>
 
       {!isProcessing && (
-        <div className="text-center text-sm text-muted-foreground">
-          <p>✨ Duotone effect applied with {isReversed ? 'pink shadows and green highlights' : 'green shadows and pink highlights'}</p>
+        <div className="text-center">
+          <div className="glass rounded-2xl p-4 inline-block">
+            <p className="text-sm font-medium">
+              ✨ Duotone effect applied with {isReversed ? 'pink shadows and green highlights' : 'green shadows and pink highlights'}
+            </p>
+          </div>
         </div>
       )}
     </div>

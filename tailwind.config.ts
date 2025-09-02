@@ -55,11 +55,16 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-duotone': 'var(--gradient-duotone)',
-				'gradient-surface': 'var(--gradient-surface)'
+				'gradient-surface': 'var(--gradient-surface)',
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-glass': 'var(--gradient-glass)'
 			},
 			boxShadow: {
 				'card': 'var(--shadow-card)',
-				'drop': 'var(--shadow-drop)'
+				'drop': 'var(--shadow-drop)',
+				'glow-pink': 'var(--shadow-glow-pink)',
+				'glow-green': 'var(--shadow-glow-green)',
+				'inner': 'var(--shadow-inner)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
